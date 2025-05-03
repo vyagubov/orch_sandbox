@@ -1,0 +1,13 @@
+[project]
+name = "Orch-Sandbox"
+version = "0.0.1"
+description = "Add your description here."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "prefect-client>=3.3,<3.3.6",
+    "prefect>=3.3,<3.3.6",
+]
+
+[tool.uv.workspace]
+members = ["prefect-client"]
