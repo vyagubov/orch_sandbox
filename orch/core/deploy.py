@@ -28,7 +28,7 @@ class DeploymentConfig:
 def get_entrypoint(cls: Type) -> str:
     file_path = Path(inspect.getfile(cls))
     rel_path = file_path.relative_to(Path(__file__).parent.parent.parent)
-    return f"{rel_path.as_posix()}:link"
+    return f"{rel_path.as_posix()}:{cls.__name__}.flow"
 
 
 @dataclass
