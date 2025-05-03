@@ -13,8 +13,6 @@ from orch.flow.inherit_test.bar.depl import InheritBar
 from orch.flow.inherit_test.foo.depl import InheritFoo
 from orch.core.base import BaseDepl
 
-project_root = Path(__file__).resolve().parents[2]
-
 
 @dataclass
 class DeploymentConfig:
@@ -31,15 +29,15 @@ async def deploy() -> None:
     global_config = {
         HelloWorld.deployment_name: DeploymentConfig(
             flow_class=HelloWorld,
-            entrypoint=f"{(project_root / "orch" / "flow" / "hello_world" / "depl.py").as_posix()}:link" ,
+            entrypoint="orch/flow/hello_world/depl.py:link",
         ),
         InheritBar.deployment_name: DeploymentConfig(
             flow_class=HelloWorld,
-            entrypoint=f"{(project_root / "orch" / "flow" / "inherit_test" / "bar" / "depl.py").as_posix()}:link" ,
+            entrypoint="orch/flow/inherit_test/bar/depl.py:link",
         ),
         InheritFoo.deployment_name: DeploymentConfig(
             flow_class=HelloWorld,
-            entrypoint=f"{(project_root / "orch" / "flow" / "inherit_test" / "foo" / "depl.py").as_posix()}:link" ,
+            entrypoint="orch/flow/inherit_test/foo/depl.py:link",
         ),
     }
 
