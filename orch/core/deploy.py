@@ -1,10 +1,10 @@
 import asyncio
 from dataclasses import dataclass
+import inspect
 from pathlib import Path
 from typing import Type
 from prefect import Flow
 from prefect.runner.storage import GitRepository
-from prefect.blocks.system import Secret
 from prefect.schedules import Cron
 
 
@@ -14,10 +14,28 @@ from orch.flow.inherit_test.foo.depl import InheritFoo
 from orch.core.base import BaseDepl
 
 
+from orch.flow.hello_world.depl import HelloWorld
+from orch.flow.inherit_test.bar.depl import InheritBar
+from orch.flow.inherit_test.foo.depl import InheritFoo
+
+
+@dataclass
+class DeploymentConfig:
+    flow_class: Type
+    entrypoint: str
+
+
+def get_entrypoint(cls: Type) -> str:
+    file_path = Path(inspect.getfile(cls))
+    rel_path = file_path.relative_to(Path(__file__).parent.parent.parent)
+    return f"{rel_path.as_posix()}:link"
+
+
 @dataclass
 class DeploymentConfig:
     flow_class: Type[BaseDepl]
     entrypoint: str
+
 
 async def deploy() -> None:
 
@@ -29,15 +47,15 @@ async def deploy() -> None:
     global_config = {
         HelloWorld.deployment_name: DeploymentConfig(
             flow_class=HelloWorld,
-            entrypoint="orch/flow/hello_world/depl.py:link",
+            entrypoint=get_entrypoint(HelloWorld),
         ),
         InheritBar.deployment_name: DeploymentConfig(
-            flow_class=HelloWorld,
-            entrypoint="orch/flow/inherit_test/bar/depl.py:link",
+            flow_class=InheritBar,
+            entrypoint=get_entrypoint(InheritBar),
         ),
         InheritFoo.deployment_name: DeploymentConfig(
-            flow_class=HelloWorld,
-            entrypoint="orch/flow/inherit_test/foo/depl.py:link",
+            flow_class=InheritFoo,
+            entrypoint=get_entrypoint(InheritFoo),
         ),
     }
 
