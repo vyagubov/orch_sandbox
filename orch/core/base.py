@@ -65,6 +65,6 @@ class BaseDepl:
             original_run = getattr(cls, "flow", None)
             static_run = staticmethod(original_run)
             decorated_run = flow(
-                name=f"{cls.flow_name or cls.__name__}{cls.env.capitalize()}",
+                name=cls.flow_name or cls.__name__,
             )(static_run)
             setattr(cls, "flow", decorated_run)
