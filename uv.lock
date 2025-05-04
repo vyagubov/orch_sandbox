@@ -621,7 +621,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "prefect", specifier = ">=3.3,<3.3.6" },
+    { name = "prefect", git = "https://github.com/vyagubov/prefect?rev=develop" },
     { name = "prefect-client", specifier = ">=3.3,<3.3.6" },
 ]
 
@@ -691,8 +691,8 @@ wheels = [
 
 [[package]]
 name = "prefect"
-version = "3.3.5"
-source = { registry = "https://pypi.org/simple" }
+version = "0.0.0+19048.g794449467"
+source = { git = "https://github.com/vyagubov/prefect?rev=develop#794449467f1c625227ac60bc19640dbd4bd0950b" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "alembic" },
@@ -747,10 +747,6 @@ dependencies = [
     { name = "uv" },
     { name = "uvicorn" },
     { name = "websockets" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/33/c6/b5ba10c6924c080adef99dc879ea123f8a56a4218fa7352dfabac0333e13/prefect-3.3.5.tar.gz", hash = "sha256:2f92f595d12938724f13d2bc50fbe9519945ffce669b996537dd762c896fb3d9", size = 5497570, upload-time = "2025-04-17T21:33:29.864Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/89/d0/6012640397fc4150b012437f56851394f862142375d5cb7539a441dd8777/prefect-3.3.5-py3-none-any.whl", hash = "sha256:10e783bf873ef51ff12f09801e0cca43b5e5f03eef70f13fdf7c90b2966f5667", size = 5986216, upload-time = "2025-04-17T21:33:27.398Z" },
 ]
 
 [[package]]
