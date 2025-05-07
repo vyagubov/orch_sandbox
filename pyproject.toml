@@ -5,9 +5,10 @@ description = "Add your description here."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "prefect @ git+https://github.com/vyagubov/prefect@develop",
+    #"prefect @ git+https://github.com/vyagubov/prefect@develop",
     #"prefect>=3.3,<3.3.6",
-    "prefect-client>=3.3,<3.3.6",
+    "prefect==3.4.1.dev4",
+    "prefect-client>=3.4,<3.4.2",
 ]
 
 [tool.uv.workspace]
