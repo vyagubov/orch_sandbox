@@ -8,12 +8,7 @@ from prefect.runner.storage import GitRepository
 from prefect.schedules import Cron
 
 
-from orch.flow.hello_world.depl import HelloWorld
-from orch.flow.inherit_test.bar.depl import InheritBar
-from orch.flow.inherit_test.foo.depl import InheritFoo
 from orch.core.base import BaseDepl
-
-
 from orch.flow.hello_world.depl import HelloWorld
 from orch.flow.inherit_test.bar.depl import InheritBar
 from orch.flow.inherit_test.foo.depl import InheritFoo
