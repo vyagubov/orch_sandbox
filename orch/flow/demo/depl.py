@@ -28,13 +28,15 @@ def get_data_from_snowflake(query: str, secret: str) -> list[dict[str, Any]]:
             {"a":7, "b": 8},
             {"a":9, "b": 10},
         ]
+    else:
+        return []
 
 @task
 def produce_to_kafka(data: list[dict[str, Any]]) -> None:
     logger = get_run_logger()
     sleep(3)
     # imitate producing to kafka
-    logger.info(f"Produced {len(data)} rows to ")
+    logger.info(f"Produced {len(data)} rows to topic_name")
 
 
 class Demo(BaseDepl):
