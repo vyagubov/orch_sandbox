@@ -24,9 +24,9 @@ def get_data_from_snowflake(query: str, secret: str) -> list[dict[str, Any]]:
     if query and secret:
         logger.info("Snowflake returned 3 rows")
         return [
-            #{"a":5, "b": 6},
-            #{"a":7, "b": 8},
-            #{"a":9, "b": 10},
+            {"a":5, "b": 6},
+            {"a":7, "b": 8},
+            {"a":9, "b": 10},
         ]
     else:
         return []
@@ -43,12 +43,15 @@ class Demo(BaseDepl):
     description: ClassVar[str] = "Simple Demo deployment"
 
     def flow() -> None:  # type: ignore
-        secret_name = "secret_name"
-        query = "select 1 as a"
+        list_ = [("secret_name", "select 1 as a"),("secret_name_", "select 2 as a")]
+        task_links = []
+        for secret_name, query in list_:
+            secret = get_secret_from_aws.submit(secret_name=secret_name)
+            task_links.append(secret)
 
-        secret = get_secret_from_aws(secret_name=secret_name)
+            data = get_data_from_snowflake.with_options(name="data_from_sf").submit(query=query, secret=secret)
+            task_links.append(data)
 
-        data = get_data_from_snowflake.with_options(name="data_from_sf")(query=query, secret=secret)
-         
-        if data:
-            produce_to_kafka(data)
+            task_links.append(produce_to_kafka.submit(data))
+            
+        [task.result() for task in task_links]
