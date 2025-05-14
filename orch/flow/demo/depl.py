@@ -24,9 +24,9 @@ def get_data_from_snowflake(query: str, secret: str) -> list[dict[str, Any]]:
     if query and secret:
         logger.info("Snowflake returned 3 rows")
         return [
-            {"a":5, "b": 6},
-            {"a":7, "b": 8},
-            {"a":9, "b": 10},
+            #{"a":5, "b": 6},
+            #{"a":7, "b": 8},
+            #{"a":9, "b": 10},
         ]
     else:
         return []
@@ -48,6 +48,7 @@ class Demo(BaseDepl):
 
         secret = get_secret_from_aws(secret_name=secret_name)
 
-        data = get_data_from_snowflake(query=query, secret=secret)
+        data = get_data_from_snowflake.with_options(name="data_from_sf")(query=query, secret=secret)
          
-        produce_to_kafka(data)
+        if data:
+            produce_to_kafka(data)
