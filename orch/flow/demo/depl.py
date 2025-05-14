@@ -17,11 +17,11 @@ def get_secret_from_aws(secret_name: str) -> str:
     
     
 @task
-def get_data_from_snowflake(query: str, secret_name: str) -> list[dict[str, Any]]:
+def get_data_from_snowflake(query: str, secret: str) -> list[dict[str, Any]]:
     # imitate querying the Snowflake
     sleep(2)
     logger = get_run_logger()
-    if query and secret_name:
+    if query and secret:
         logger.info("Snowflake returned 3 rows")
         return [
             {"a":5, "b": 6},
