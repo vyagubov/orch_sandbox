@@ -17,6 +17,7 @@ from orch.core.base import BaseDepl
 from orch.flow.hello_world.depl import HelloWorld
 from orch.flow.inherit_test.bar.depl import InheritBar
 from orch.flow.inherit_test.foo.depl import InheritFoo
+from orch.flow.demo.depl import Demo
 
 
 @dataclass
@@ -56,6 +57,10 @@ async def deploy() -> None:
         InheritFoo.deployment_name: DeploymentConfig(
             flow_class=InheritFoo,
             entrypoint=get_entrypoint(InheritFoo),
+        ),
+        Demo.deployment_name: DeploymentConfig(
+            flow_class=Demo,
+            entrypoint=get_entrypoint(Demo),
         ),
     }
 
