@@ -32,7 +32,7 @@ def get_data_from_snowflake(query: str, secret: str) -> list[dict[str, Any]]:
 @task
 def produce_to_kafka(data: list[dict[str, Any]]) -> None:
     logger = get_run_logger()
-    sleep()
+    sleep(3)
     # imitate producing to kafka
     logger.info(f"Produced {len(data)} rows to ")
 
