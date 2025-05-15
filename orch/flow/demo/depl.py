@@ -53,5 +53,7 @@ class Demo(BaseDepl):
             task_links.append(data)
 
             task_links.append(produce_to_kafka.submit(data))
-            
+
         [task.result() for task in task_links]
+
+flow = Demo.flow
