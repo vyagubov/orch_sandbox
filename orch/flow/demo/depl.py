@@ -42,7 +42,7 @@ def produce_to_kafka(data: list[dict[str, Any]]) -> None:
 class Demo(BaseDepl):
     description: ClassVar[str] = "Simple Demo deployment"
 
-    def flow() -> None:  # type: ignore
+    def flow(anything: list[str]) -> None:  # type: ignore
         list_ = [("secret_name", "select 1 as a"),("secret_name_", "select 2 as a")]
         task_links = []
         for secret_name, query in list_:
@@ -55,5 +55,6 @@ class Demo(BaseDepl):
             task_links.append(produce_to_kafka.submit(data))
 
         [task.result() for task in task_links]
+
 
 flow = Demo.flow
