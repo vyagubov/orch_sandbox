@@ -20,4 +20,5 @@ async def undeploy_by_name(deployment_name: str) -> None:
 if __name__ == "__main__":
 
     asyncio.run(undeploy_by_name(Demo.deployment_name))
+
     Demo.flow.serve(name=Demo.deployment_name)
