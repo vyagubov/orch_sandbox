@@ -22,3 +22,5 @@ class HelloWorld(BaseDepl):
         parallel_tasks = say_hello.map(names)  # most common parallel task
 
         [task.result() for task in parallel_tasks]  # catch the result
+
+
