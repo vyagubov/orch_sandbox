@@ -53,10 +53,10 @@ async def deploy() -> None:
             flow_class=InheritFoo,
             entrypoint=get_entrypoint(InheritFoo),
         ),
-        Demo.deployment_name: DeploymentConfig(
-            flow_class=Demo,
-            entrypoint=get_entrypoint(Demo),
-        ),
+        #Demo.deployment_name: DeploymentConfig(
+        #    flow_class=Demo,
+        #    entrypoint=get_entrypoint(Demo),
+        #),
     }
 
     for (deployment_name,

@@ -14,7 +14,8 @@ def get_url(url: str, params: Optional[dict[str, any]] = None):
 
 class InheritBase(BaseDepl):
 
-    def flow(repo_name: str = "PrefectHQ/prefect"):
+    @classmethod
+    def flow(cls, repo_name: str = "PrefectHQ/prefect"):
         url = f"https://api.github.com/repos/{repo_name}"
         repo_stats = get_url(url)
         print(f"{repo_name} repository statistics 🤓:")

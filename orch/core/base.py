@@ -63,8 +63,7 @@ class BaseDepl:
         # Check if "flow" method was implemented in current class, not in parent
         if "flow" in cls.__dict__:
             original_run = getattr(cls, "flow", None)
-            static_run = staticmethod(original_run)
             decorated_run = flow(
                 name=cls.flow_name or cls.__name__,
-            )(static_run)
+            )(original_run)
             setattr(cls, "flow", decorated_run)

@@ -17,8 +17,11 @@ def say_hello(name: str) -> None:
 
 class HelloWorld(BaseDepl):
     description: ClassVar[str] = "Simple Hello World deployment"
+    a: ClassVar[str] = "aaaaaaaa"
 
-    def flow(names: list[str]) -> None:  # type: ignore
+    @classmethod
+    def flow(cls, names: list[str]) -> None:  # type: ignore
+        names = [f"{name}{cls.a}" for name in names]
         parallel_tasks = say_hello.map(names)  # most common parallel task
 
         [task.result() for task in parallel_tasks]  # catch the result
