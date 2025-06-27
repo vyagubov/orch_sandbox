@@ -21,8 +21,8 @@ class HelloWorld(BaseDepl):
 
     @classmethod
     def flow(cls, names: list[str]) -> None:  # type: ignore
-        names = [f"{name}_{cls.a}_{HelloWorld.a}" for name in names]
-        parallel_tasks = say_hello.map(names)  # most common parallel task
+        names_new = [f"{name}_{cls.a}_{HelloWorld.a}" for name in names]
+        parallel_tasks = say_hello.map(names_new)  # most common parallel task
 
         [task.result() for task in parallel_tasks]  # catch the result
 
